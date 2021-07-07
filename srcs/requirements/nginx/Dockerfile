@@ -3,13 +3,15 @@ FROM debian:buster
 
 # установка пакетов
 RUN apt-get update && apt-get install -y \
-    nginx 
+    nginx
+	# php7.2-fpm
+	# php7.2-mysql
 
 # NGINX configuration (удаляем index файл)
 # RUN rm var/www/html/index.nginx-debian.html
 
 # копируем свои настройки nginx
-COPY srcs/default /etc/nginx/sites-available/default
+COPY ./conf /etc/nginx/sites-available
 
 # SSL
 # openssl: базовый инструмент командной строки для создания и управления сертификатами, ключами и другими файлами OpenSSL.
@@ -30,4 +32,6 @@ RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
 RUN chown -R www-data:www-data /var/www/html/*
 
 # Открываем 2 порта
-EXPOSE 443 9000
+EXPOSE 80 443
+
+CMD nginx -g "daemon off;"
