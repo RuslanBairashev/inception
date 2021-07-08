@@ -2,8 +2,10 @@
 FROM debian:buster
 
 # установка пакетов
-RUN apt-get update && apt-get install -y \
-    nginx
+RUN apt-get update && \
+	apt-get install -y \
+    nginx \
+	openssl
 	# php7.2-fpm
 	# php7.2-mysql
 

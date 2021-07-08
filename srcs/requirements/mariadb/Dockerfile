@@ -3,13 +3,14 @@ FROM debian:buster
 
 # установка пакетов
 RUN apt-get update && apt-get install -y \
-    mariadb-server
+    mariadb-server \
+    php7.3-fpm
 
 # Прописываем права доступа к папкам
-RUN chown -R www-data:www-data /var/www/html/*
+#RUN chown -R www-data:www-data /var/www/html/*
 
 # Копируем скрипты в папку
-COPY srcs/*.sh ./
+COPY ./tools/*.sh ./
 
 # Открываем 2 порта
 EXPOSE 80 443

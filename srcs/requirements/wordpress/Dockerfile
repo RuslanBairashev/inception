@@ -3,7 +3,8 @@ FROM debian:buster
 #FROM wordpress:php7.1-apache
 #COPY . /var/www/html
 # установка пакетов
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+	apt-get install -y \
     wordpress \
     php-fpm
    # wget
@@ -25,4 +26,4 @@ RUN apt-get update && apt-get install -y \
 # Открываем 2 порта
 EXPOSE 3306 9000
 
-CMD ["php-fpm"]
+CMD php-fpm

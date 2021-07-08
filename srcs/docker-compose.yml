@@ -1,64 +1,64 @@
 version: "3.9"
 
 services:
-    # First servise
-    nginx:
-        build: ./requirements/nginx
-        #image: nginx:1.21
-        #environment: 
-        ports:
-            - "80:80"
-            - "443:443"
-        environment: 
-            - NGINX_HOST=foobar.com
-            - NGINX_PORT=80
-        volumes: 
-            - wordpress_data:/var/www/html
-        networks: 
-            - wpsite
-        tty: true
-    # Second servise
-    db:
-        #build: ./requirements/mariadb
-        image: mariadb:10
-        volumes:
-            - db_data:/var/lib/mysql
-        restart: always
-        #ports:
-         #   - "3306:9000"
-        environment: 
-            MARIADB_ROOT_PASSWORD: 123
-            MARIADB_DATABASE: wordpress
-            MARIADB_USER: wordpress
-            MARIADB_PASSWORD: wordpress
-        networks:
-            - wpsite
-    wordpress:
-        depends_on: 
-            - db
-        # build: ./requirements/wordpress
-  # build:
-    # context: ./requirements/wordpress
-        image: wordpress:5.7
-        restart: always
-        ports:
-            - "9000:80"
-        volumes: 
-            - wordpress_data:/var/www/html
-        environment:
-            WORDPRESS_DB_HOST: db:3306
-            WORRPRESS_DB_NAME: wordpress
-            WORDPRESS_DB_USER: wordpress
-            WORDPRESS_DB_PASSWORD: wordpress
-        depends_on: 
-            - nginx
-        networks:
-            - wpsite
-        tty: true
+  # First servise
+  nginx:
+    container_name: con_nginx
+    build: ./requirements/nginx
+    #image: nginx:1.21
+    #environment: 
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes: 
+      - wordpress_data:/var/www/html
+    networks: 
+      - mynetwork
+    tty: true
+
+  # Second servise
+  db:
+    container_name: con_db
+    build: ./requirements/mariadb
+    #image: mariadb:10
+    volumes:
+    - db_data:/var/lib/mysql
+    restart: always
+    #ports:
+    #   - "3306:9000"
+    environment: 
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${USER}
+      MYSQL_PASSWORD: ${PASSWORD}
+    networks:
+    - mynetwork
+  wordpress:
+    container_name: con_wordpress
+    build: ./requirements/wordpress
+    #build:
+    #context: ./requirements/wordpress
+    #image: wordpress:5.7
+    restart: always
+    ports:
+    - "9000:80"
+    volumes: 
+    - wordpress_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORRPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    depends_on: 
+    - nginx
+    - db
+    networks:
+    - mynetwork
+    tty: true
 
 
 volumes: 
-    wordpress_data:
-    db_data:
+  wordpress_data:
+  db_data:
 networks:
-    wpsite:
+  mynetwork:

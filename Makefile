@@ -6,32 +6,39 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}'
  
 ##################################################
-# Создание (build) сжатых (squashed) docker-образов и пуш (push) в docker-registry для использования других окружениях
-# Для сжатия (squash) на хост машине должен быть установлен флаг "experimental"
-# Для пуша нужно залогиниться в docker-registry
+# Создание docker-образов
 ##################################################
-dc-all : dc-bsp-redis dc-bsp-workspace dc-bsp-php-fpm dc-bsp-node-npm dc-bsp-memcached dc-bsp-nginx dc-push-images
+all-images : ft_nginx ft_db ft_wordpress
  
-dc-nginx: ## Создание сжатого docker-образа для контейнера nginx
-	docker build -f nginx/Dockerfile
+ft_nginx: ## Создание сжатого docker-образа для контейнера nginx
+	docker build -t ft_nginx ./srcs/requirements/nginx
+
+ft_db: ## Создание сжатого docker-образа для контейнера db
+	docker build -t ft_db ./srcs/requirements/mariadb
+
+ft_wordpress: ## Создание сжатого docker-образа для контейнера wordpress
+	docker build -t ft_wordpress ./srcs/requirements/wordpress
+
+del_nginx:
+	cd srcs; docker rmi ft_nginx
   
 ####################################################################################################
-# Управление контейнерами с помощью docker-compose (dc)
+# Управление контейнерами с помощью docker-compose
 ####################################################################################################
-dc-build: ## Сборка docker-образов согласно инструкциям из docker-compose.yml
+build: ## Сборка docker-образов согласно инструкциям из docker-compose.yml
 	docker-compose build
  
-dc-up: ## Создание и запуск docker-контейнеров, описанных в docker-compose.yml
-	docker-compose up -d
+up: ## Создание и запуск docker-контейнеров, описанных в docker-compose.yml
+	cd srcs; docker-compose up -d
  
-dc-down: ## Остановка и УДАЛЕНИЕ docker-контейнеров, описанных в docker-compose.yml
-	docker-compose down
+down: ## Остановка и УДАЛЕНИЕ docker-контейнеров, описанных в docker-compose.yml
+	cd srcs; docker-compose down
  
-dc-stop: ## Остановка docker-контейнеров, описанных в docker-compose.yml
-	docker-compose stop
+stop: ## Остановка docker-контейнеров, описанных в docker-compose.yml
+	cd srcs; docker-compose stop
  
-dc-start: ## Запуск docker-контейнеров, описанных в docker-compose.yml
-	docker-compose start
+start: ## Запуск docker-контейнеров, описанных в docker-compose.yml
+	cd srcs; docker-compose start
  
 ####################################################################################################
 # Подключение к консоли контейнеров (контейнеры должны быть запущены)
