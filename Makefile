@@ -8,7 +8,7 @@ help:
 ##################################################
 # Создание docker-образов
 ##################################################
-all-images : ft_nginx ft_db ft_wordpress
+ft-all : ft_nginx ft_db ft_wordpress
  
 ft_nginx: ## Создание сжатого docker-образа для контейнера nginx
 	docker build -t ft_nginx ./srcs/requirements/nginx
@@ -20,8 +20,14 @@ ft_wordpress: ## Создание сжатого docker-образа для ко
 	docker build -t ft_wordpress ./srcs/requirements/wordpress
 
 del_nginx:
-	cd srcs; docker rmi ft_nginx
-  
+	cd srcs; docker rmi obr-nginx
+
+del_db:
+	cd srcs; docker rmi obr-db
+
+del_wordpress:
+	cd srcs; docker rmi obr-wordpress
+
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose
 ####################################################################################################

@@ -5,21 +5,22 @@ services:
   nginx:
     container_name: con_nginx
     build: ./requirements/nginx
+    image: obr-nginx
     #image: nginx:1.21
-    #environment: 
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes: 
       - wordpress_data:/var/www/html
+    restart: always
     networks: 
       - mynetwork
-    tty: true
 
   # Second servise
   db:
     container_name: con_db
     build: ./requirements/mariadb
+    image: obr-db
     #image: mariadb:10
     volumes:
     - db_data:/var/lib/mysql
@@ -33,9 +34,11 @@ services:
       MYSQL_PASSWORD: ${PASSWORD}
     networks:
     - mynetwork
+
   wordpress:
     container_name: con_wordpress
     build: ./requirements/wordpress
+    image: obr-wordpress
     #build:
     #context: ./requirements/wordpress
     #image: wordpress:5.7
@@ -54,8 +57,6 @@ services:
     - db
     networks:
     - mynetwork
-    tty: true
-
 
 volumes: 
   wordpress_data:
