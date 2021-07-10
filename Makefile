@@ -8,16 +8,18 @@ help:
 ##################################################
 # Создание docker-образов
 ##################################################
-ft-all : ft_nginx ft_db ft_wordpress
+obr_all : obr-nginx obr-db obr-wordpress
  
-ft_nginx: ## Создание сжатого docker-образа для контейнера nginx
-	docker build -t ft_nginx ./srcs/requirements/nginx
+obr_nginx: ## Создание сжатого docker-образа для контейнера nginx
+	docker build -t obr-nginx ./srcs/requirements/nginx
 
-ft_db: ## Создание сжатого docker-образа для контейнера db
-	docker build -t ft_db ./srcs/requirements/mariadb
+obr_db: ## Создание сжатого docker-образа для контейнера db
+	docker build -t obr-db ./srcs/requirements/mariadb
 
-ft_wordpress: ## Создание сжатого docker-образа для контейнера wordpress
-	docker build -t ft_wordpress ./srcs/requirements/wordpress
+obr_wordpress: ## Создание сжатого docker-образа для контейнера wordpress
+	docker build -t obr-wordpress ./srcs/requirements/wordpress
+
+del_all: del_nginx del_db del_wordpress
 
 del_nginx:
 	cd srcs; docker rmi obr-nginx
@@ -27,6 +29,16 @@ del_db:
 
 del_wordpress:
 	cd srcs; docker rmi obr-wordpress
+
+##################################################
+# Запуск docker-образов
+##################################################
+
+run_nginx:
+	docker run --name con_nginx --rm -it -p 80:80 -p 443:443 obr-nginx
+
+run_wordpress:
+	docker run --name con_wordpress --rm -it obr-wordpress
 
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose
@@ -52,9 +64,12 @@ start: ## Запуск docker-контейнеров, описанных в dock
 console-workspace: ## Подключение к консоли контейнера workspace (пользователь www-data)
 	docker-compose exec --user www-data workspace bash
  
-console-nginx: ## Подключение к консоли контейнера nginx (пользователь root)
-	docker-compose exec nginx bash
- 
+exec_nginx: ## Подключение к консоли контейнера nginx
+	docker exec -it con_nginx bash
+
+exec_wordpress: ## Подключение к консоли контейнера nginx
+	docker exec -it con_wordpress bash
+
 console-php-fpm: ## Подключение к консоли контейнера php-fmp (пользователь root)
 	docker-compose exec php-fpm bash
  

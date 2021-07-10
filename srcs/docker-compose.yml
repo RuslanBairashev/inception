@@ -11,7 +11,7 @@ services:
       - 80:80
       - 443:443
     volumes: 
-      - wordpress_data:/var/www/html
+      - wordpress_data:/var/www/wordpress
     restart: always
     networks: 
       - mynetwork
@@ -43,18 +43,18 @@ services:
     #context: ./requirements/wordpress
     #image: wordpress:5.7
     restart: always
-    ports:
-    - "9000:80"
+    #ports:
+    #- "9000:80"
     volumes: 
-    - wordpress_data:/var/www/html
+    - wordpress_data:/var/www/wordpress
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORRPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
-    depends_on: 
-    - nginx
-    - db
+    #depends_on: 
+    #- nginx
+    #- db
     networks:
     - mynetwork
 

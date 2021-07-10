@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 COPY ./tools/*.sh ./
 
 # Открываем 2 порта
-EXPOSE 80 443
+#EXPOSE 80 443
 
 # Команды исполняемые контейнером на старте
 CMD bash start.sh

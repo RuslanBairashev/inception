@@ -31,9 +31,10 @@ RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
     -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=localhost'
 
 # Прописываем права доступа к папкам
-RUN chown -R www-data:www-data /var/www/html/*
+RUN mkdir /var/www/wordpress
+#RUN chown -R www-data:www-data /var/www/wordpress/*
 
 # Открываем 2 порта
 EXPOSE 80 443
 
-CMD nginx -g "daemon off;"
+CMD nginx -g 'daemon off;'
