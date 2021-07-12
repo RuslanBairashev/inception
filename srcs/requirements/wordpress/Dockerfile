@@ -1,7 +1,6 @@
 # OS установка (базовый образ)
 FROM debian:buster
-#FROM wordpress:php7.1-apache
-#COPY . /var/www/html
+
 # установка пакетов
 RUN apt-get update && \
 	apt-get install -y \

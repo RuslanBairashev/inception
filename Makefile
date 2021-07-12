@@ -19,7 +19,7 @@ obr_db: ## Создание сжатого docker-образа для конте
 obr_wordpress: ## Создание сжатого docker-образа для контейнера wordpress
 	docker build -t obr_wordpress ./srcs/requirements/wordpress
 
-del_all: del_nginx del_db del_wordpress
+drop_all: drop_nginx drop_db drop_wordpress
 
 del_nginx:
 	cd srcs; docker rmi obr_nginx
