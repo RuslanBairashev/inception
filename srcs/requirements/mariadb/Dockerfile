@@ -3,8 +3,7 @@ FROM debian:buster
 
 # установка пакетов
 RUN apt-get update && apt-get install -y \
-    mariadb-server \
-    php7.3-fpm
+    mariadb-server 
 
 # Прописываем права доступа к папкам
 #RUN chown -R www-data:www-data /var/www/html/*
@@ -13,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 COPY ./tools/*.sh ./
 
 # Открываем 2 порта
-#EXPOSE 80 443
+EXPOSE 3306
 
 # Команды исполняемые контейнером на старте
-CMD bash start.sh
+ENTRYPOINT [ "bash", "start.sh" ]

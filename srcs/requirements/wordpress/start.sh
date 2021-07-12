@@ -1,4 +1,2 @@
-# Стартуем php
-service php7.3-fpm start
-
-bash
+#!/user/bin/env bash
+exec /usr/sbin/php-fpm7.3 --nodaemonize

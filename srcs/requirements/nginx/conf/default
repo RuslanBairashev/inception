@@ -14,7 +14,7 @@ server {
         ssl_certificate         /etc/ssl/certs/nginx-selfsigned.crt;
         ssl_certificate_key     /etc/ssl/private/nginx-selfsigned.key;
         ssl_protocols           TLSv1 TLSv1.1 TLSv1.2;
-        root                    /var/www/wordpress;
+        root                    /var/www/html;
         autoindex               on;
         index index.php index.html index.htm index.nginx-debian.html;
 
@@ -22,16 +22,13 @@ server {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
                 try_files $uri $uri/ =404;
-				proxy_set_header Host $http_host;
         }
 
         # pass PHP scripts to FastCGI server
         #
         location ~ \.php$ {
                include snippets/fastcgi-php.conf;
-               # With php-fpm (or other unix sockets):
-               fastcgi_pass unix:/run/php/php7.3-fpm.sock;
                # With php-cgi (or other tcp sockets):
-               #fastcgi_pass 127.0.0.1:9000;
+               fastcgi_pass wordpress:9000;
         }
 }
