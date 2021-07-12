@@ -1,11 +1,10 @@
 # OS установка (базовый образ)
 FROM debian:buster
-#FROM wordpress:php7.1-apache
-#COPY . /var/www/html
+
 # установка пакетов
 RUN apt-get update && \
 	apt-get install -y \
-    php7.3 php7.3-fpm php7.3-mysqli
+    php7.3 php7.3-fpm php7.3-mysqli php7.3-mbstring
 
 # WORDPRESS configuration
 # Download from internet
@@ -21,7 +20,7 @@ COPY ./conf/wp-config.php /var/www/wordpress/wordpress
 #RUN chown -R www-data:www-data /var/www/wordpress/*
 
 # Открываем 2 порта
-#EXPOSE 3306 9000
+EXPOSE 9000
 
 COPY ./start.sh /
 

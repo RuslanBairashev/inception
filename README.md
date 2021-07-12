@@ -13,3 +13,8 @@ https://docs.docker.com/engine/install/linux-postinstall/
 Добавление ssh для комфортной работы: https://losst.ru/nastrojka-ssh-v-debian + https://wiki.debian.org/ru/DHCP_Client
 
 https://mariadb.com/kb/en/creating-a-custom-docker-image/
+
+Wordpress Server Environment
+https://make.wordpress.org/hosting/handbook/server-environment/
+
+https://www.youtube.com/watch?v=j1FAZ0bUEvs

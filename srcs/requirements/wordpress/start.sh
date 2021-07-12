@@ -1,4 +1,6 @@
 # Стартуем php
-service php7.3-fpm start
+#service php7.3-fpm start
 
-bash
+#bash
+
+php -S localhost:9000

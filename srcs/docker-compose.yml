@@ -5,10 +5,9 @@ services:
   nginx:
     container_name: con_nginx
     build: ./requirements/nginx
-    image: obr-nginx
+    image: obr_nginx
     #image: nginx:1.21
     ports:
-      - 80:80
       - 443:443
     volumes: 
       - wordpress_data:/var/www/wordpress
@@ -20,13 +19,13 @@ services:
   db:
     container_name: con_db
     build: ./requirements/mariadb
-    image: obr-db
+    image: obr_db
     #image: mariadb:10
     volumes:
     - db_data:/var/lib/mysql
     restart: always
-    #ports:
-    #   - "3306:9000"
+    ports:
+       - "3306:3306"
     environment: 
       MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
       MYSQL_DATABASE: ${DATABASE}
@@ -38,13 +37,13 @@ services:
   wordpress:
     container_name: con_wordpress
     build: ./requirements/wordpress
-    image: obr-wordpress
+    image: obr_wordpress
     #build:
     #context: ./requirements/wordpress
     #image: wordpress:5.7
     restart: always
-    #ports:
-    #- "9000:80"
+    ports:
+    - "9000:9000"
     volumes: 
     - wordpress_data:/var/www/wordpress
     environment:
@@ -63,3 +62,4 @@ volumes:
   db_data:
 networks:
   mynetwork:
+    driver: "bridge"

@@ -35,6 +35,6 @@ RUN mkdir /var/www/wordpress
 #RUN chown -R www-data:www-data /var/www/wordpress/*
 
 # Открываем 2 порта
-EXPOSE 80 443
+EXPOSE 443
 
 CMD nginx -g 'daemon off;'

@@ -1,10 +1,7 @@
 # Стартуем mysql
-service mysql start
+service mysqld start
 mysql -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'admin'@'localhost' IDENTIFIED BY 'admin';"
+mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';"
 mysql -e "FLUSH PRIVILEGES;"
-
-# Стартуем php
-service php7.3-fpm start
 
 bash
