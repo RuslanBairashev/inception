@@ -22,7 +22,7 @@ COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 #RUN chown -R www-data:www-data /var/www/wordpress/*
 
 # Открываем 2 порта
-#EXPOSE 9000
+EXPOSE 9000
 
 COPY ./start.sh /
 

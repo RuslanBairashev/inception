@@ -40,6 +40,9 @@ run_nginx:
 run_wordpress:
 	docker run --name con_wordpress --rm -it obr_wordpress
 
+run_db:
+	docker run --name con_db --rm -it obr_db
+
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose
 ####################################################################################################
@@ -69,6 +72,9 @@ exec_nginx: ## Подключение к консоли контейнера ngi
 
 exec_wordpress: ## Подключение к консоли контейнера nginx
 	docker exec -it con_wordpress bash
+
+exec_db: ## Подключение к консоли контейнера db
+	docker exec -it con_db bash
 
 console-php-fpm: ## Подключение к консоли контейнера php-fmp (пользователь root)
 	docker-compose exec php-fpm bash
