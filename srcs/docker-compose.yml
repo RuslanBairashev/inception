@@ -9,6 +9,7 @@ services:
     #image: nginx:1.21
     ports:
       - 443:443
+      - 80:80
     volumes: 
       - wordpress_data:/var/www/html
     restart: always
@@ -45,8 +46,8 @@ services:
     #context: ./requirements/wordpress
     #image: wordpress:5.7
     restart: always
-    ports:
-    - "9000:9000"
+    #ports:
+    #- "9000:9000"
     volumes: 
     - wordpress_data:/var/www/html
     environment:

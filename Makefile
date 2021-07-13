@@ -21,13 +21,13 @@ obr_wordpress: ## Создание сжатого docker-образа для к�
 
 drop_all: drop_nginx drop_db drop_wordpress
 
-del_nginx:
+drop_nginx:
 	cd srcs; docker rmi obr_nginx
 
-del_db:
+drop_db:
 	cd srcs; docker rmi obr_db
 
-del_wordpress:
+drop_wordpress:
 	cd srcs; docker rmi obr_wordpress
 
 ##################################################

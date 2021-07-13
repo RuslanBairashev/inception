@@ -35,6 +35,6 @@ RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
 #RUN chown -R www-data:www-data /var/www/html/*
 
 # Открываем 2 порта
-EXPOSE 443
+EXPOSE 80 443
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
