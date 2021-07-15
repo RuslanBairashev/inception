@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  # First servise
+  nginx:
+    container_name: con_nginx
+    image: nginx:1.21
+    ports:
+      - 443:443
+      - 80:80
+    volumes: 
+      - wordpress_data:/var/www/html
+    restart: always
+    networks: 
+      - mynetwork
+    depends_on: 
+      - wordpress
+
+  # Second servise
+  db:
+    container_name: con_db
+    image: mariadb:10
+    #volumes:
+    #- db_data:/var/lib/mysql
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+    - mynetwork
+    
+  wordpress:
+    container_name: con_wordpress
+    image: wordpress:5.7
+    restart: always
+    #ports:
+    #- "9000:9000"
+    volumes: 
+    - wordpress_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORRPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    depends_on: 
+    - db
+    networks:
+    - mynetwork
+
+volumes: 
+  wordpress_data:
+  db_data:
+networks:
+  mynetwork:
+    name: mynetwork
+    driver: bridge

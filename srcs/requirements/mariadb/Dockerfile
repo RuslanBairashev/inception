@@ -13,7 +13,7 @@ COPY ./conf/custom.cnf /etc/mysql/conf.d/
 #COPY ./tools/init.sql /docker-entrypoint-initdb.d/
 
 # Копируем скрипты в папку
-COPY ./tools/*.sh ./
+COPY ./tools/*.sh /
 
 # Открываем 2 порта
 EXPOSE 3306
