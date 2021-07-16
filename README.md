@@ -18,3 +18,6 @@ Wordpress Server Environment
 https://make.wordpress.org/hosting/handbook/server-environment/
 
 https://www.youtube.com/watch?v=j1FAZ0bUEvs
+
+Сборка на базовых образах:
+https://admin812.ru/razvertyvanie-wordpress-s-nginx-php-fpm-i-mariadb-s-pomoshhyu-docker-compose.html
