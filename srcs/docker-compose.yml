@@ -37,19 +37,22 @@ services:
     
   wordpress:
     container_name: con_wordpress
-    image: wordpress:php7.4-fpm-alpine
+    #image: wordpress:php7.4-fpm-alpine
+    build: ./requirements/wordpress
+    image: obr_wordpress
     restart: always
     #ports:
     #- "9000:9000"
     volumes: 
     - wordpress_data:/var/www/html
-    environment:
-      WORDPRESS_DB_HOST: db
-      MYSQL_ROOT_PASSWORD: 123
-      WORRPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_TABLE_PREFIX: wp_
+    - ./requirements/wordpress/conf/wp-config.php:/var/www/html/wp-config.php
+    #environment:
+    #  WORDPRESS_DB_HOST: db
+    #  MYSQL_ROOT_PASSWORD: 123
+    #  WORRPRESS_DB_NAME: wordpress
+    #  WORDPRESS_DB_USER: wordpress
+     # WORDPRESS_DB_PASSWORD: wordpress
+    #  WORDPRESS_TABLE_PREFIX: wp_
     links: 
     - db
     networks:
