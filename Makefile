@@ -41,7 +41,7 @@ run_wordpress:
 	docker run --name con_wordpress --rm -it obr_wordpress
 
 run_db:
-	docker run --name con_db --rm -it obr_db
+	docker run --name con_db --rm -it -p 3306:3306 obr_db
 
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose

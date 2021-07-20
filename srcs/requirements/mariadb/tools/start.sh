@@ -7,4 +7,4 @@ mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'wordpress'@'%';"
 mysql -e "FLUSH PRIVILEGES;"
 service mysql stop
 #exec bash
-exec mysqld
+exec mysqld #если удалить, то не работает

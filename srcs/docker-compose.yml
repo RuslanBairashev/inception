@@ -15,17 +15,17 @@ services:
     restart: always
     networks: 
       - mynetwork
-    links: 
-      - wordpress
+    #links: 
+    #  - wordpress
 
   # Second servise
   db:
     container_name: con_db
-    image: mariadb:10
-    #ports:
-    #  - 3306:3306
+    build: ./requirements/mariadb
+    image: obr_db
     volumes:
     - db_data:/var/lib/mysql
+    - ./requirements/mariadb/conf/my.cnf:/etc/mysql/my.cnf
     restart: always
     environment: 
       MYSQL_ROOT_PASSWORD: 123
@@ -53,8 +53,8 @@ services:
     #  WORDPRESS_DB_USER: wordpress
      # WORDPRESS_DB_PASSWORD: wordpress
     #  WORDPRESS_TABLE_PREFIX: wp_
-    links: 
-    - db
+    #links: 
+    #- db
     networks:
     - mynetwork
 

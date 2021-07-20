@@ -2,22 +2,23 @@
 FROM debian:buster
 
 # установка пакетов
-RUN apt-get update && \
-	apt-get install -y \
-    mariadb-server 
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y mariadb-server
 
-# Прописываем права доступа к папкам
-#RUN chown -R www-data:www-data /var/www/html/*
+VOLUME /var/lib/mysql
 
-COPY ./conf/custom.cnf /etc/mysql/conf.d/
-#COPY ./tools/init.sql /docker-entrypoint-initdb.d/
+USER root
+
+
+
+COPY ./conf/my.cnf /etc/mysql/my.cnf
+COPY ./tools/init.sql /docker-entrypoint-initdb.d/
 
 # Копируем скрипты в папку
-COPY ./tools/*.sh /
+COPY tools/start.sh ./
 
-# Открываем 2 порта
 EXPOSE 3306
 
+ENTRYPOINT [ "bash", "./start.sh" ]
 # Команды исполняемые контейнером на старте
 #CMD ["mysqld"]
-ENTRYPOINT [ "bash", "start.sh" ]
