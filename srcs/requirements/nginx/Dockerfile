@@ -25,16 +25,16 @@ RUN apt-get update && \
 # -keyout: эта опция сообщает OpenSSL, куда поместить сгенерированный файл ключа.
 # -out: сообщает OpenSSL, куда поместить созданный сертификат.
 # -SHA-2 (англ. Secure Hash Algorithm Version 2 — безопасный алгоритм хеширования, версия 2) — семейство криптографических алгоритмов — однонаправленных хеш-функций, включающее в себя алгоритмы SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/256 и SHA-512/224.
-##RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
-##    -keyout /etc/ssl/private/nginx-selfsigned.key \
-##    -out /etc/ssl/certs/nginx-selfsigned.crt \
-##    -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=localhost'
+RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/nginx-selfsigned.key \
+    -out /etc/ssl/certs/nginx-selfsigned.crt \
+    -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=localhost'
 
 # Прописываем права доступа к папкам
 #RUN mkdir /var/www/html
 #RUN chown -R www-data:www-data /var/www/html/*
 
 # Открываем 2 порта
-EXPOSE 80 443
+EXPOSE 443
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
