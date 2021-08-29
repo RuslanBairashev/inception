@@ -4,7 +4,7 @@ FROM debian:buster
 # установка пакетов
 RUN apt-get update && \
 	apt-get install -y \
-    php7.3 php7.3-fpm php7.3-json php7.3-mysqli php7.3-xml php7.3-curl php7.3-iconv php7.3-phar php7.3-redis php7.3-ctype
+    curl wget php7.3 php7.3-fpm php7.3-json php7.3-mysqli php7.3-xml php7.3-curl php7.3-iconv php7.3-phar php7.3-redis php7.3-ctype
     # строку выше поменять, тк. она скопирована
 
 # WORDPRESS configuration
@@ -32,7 +32,7 @@ COPY ./start.sh /
 
 
 #ENTRYPOINT  ["/usr/sbin/php-fpm7.3", "-F", "-R"]
-ENTRYPOINT [ "/usr/sbin/php-fpm7.3" ]
-CMD [ "--nodaemonize" ]
-#ENTRYPOINT [ "bash", "start.sh" ]
+###ENTRYPOINT [ "/usr/sbin/php-fpm7.3" ]
+###CMD [ "--nodaemonize" ]
+ENTRYPOINT [ "bash", "./start.sh" ]
 #CMD /usr/sbin/php-fpm -F

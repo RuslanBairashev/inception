@@ -13,6 +13,8 @@ services:
       - ./requirements/nginx/conf:/etc/nginx/conf.d
       - wordpress_data:/var/www/html
     restart: always
+    depends_on:
+      - wordpress
     networks: 
       - mynetwork
     #links: 
@@ -41,6 +43,8 @@ services:
     build: ./requirements/wordpress
     image: obr_wordpress
     restart: always
+    depends_on:
+      - db
     #ports:
     #- "9000:9000"
     volumes: 
@@ -60,7 +64,19 @@ services:
 
 volumes: 
   wordpress_data:
+    name: wordpress_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/eternity/data/wordpress_data
   db_data:
+    name: db_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/eternity/data/db_data
 networks:
   mynetwork:
     name: mynetwork
