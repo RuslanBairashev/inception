@@ -3,7 +3,7 @@ https://www.youtube.com/watch?v=lXajYKBWrQ0&ab_channel=Shchepotin
 
 https://www.youtube.com/watch?v=-2I4123TW4E&ab_channel=ITtipsandtricks
 
-Сообщение для закрепа с полезными ссылками.
+Сообщение для закрепа с полезными ссылками. 
 Изучите, что такое VirtualBox
 https://poznyaev.ru/blog/linux/debian-v-virualbox
 https://docs.docker.com/engine/install/debian/
