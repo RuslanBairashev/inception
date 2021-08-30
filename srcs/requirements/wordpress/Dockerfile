@@ -23,9 +23,10 @@ COPY ./conf/wp-config.php /var/www/html/wp-config.php
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 
 # Прописываем права доступа к папкам
-RUN chown -R www-data:www-data /var/www/html/*
+RUN chown -R www-data:www-data /var/www/html/* && \
+chmod -R 775 /var/www/html/*
 
-# Открываем 2 порта
+# Открываем порт
 EXPOSE 9000
 
 COPY ./start.sh /

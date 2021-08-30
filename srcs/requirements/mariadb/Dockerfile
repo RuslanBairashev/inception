@@ -13,6 +13,7 @@ USER root
 
 COPY ./conf/my.cnf /etc/mysql/my.cnf
 COPY ./tools/init.sql /docker-entrypoint-initdb.d/
+#COPY ./conf/wordpress /var/lib/mysql/wordpress
 
 # Копируем скрипты в папку
 COPY tools/start.sh ./
