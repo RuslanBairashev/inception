@@ -1,12 +1,11 @@
 version: "3.9"
-#var2
 services:
   # First servise
   nginx:
     container_name: con_nginx
     ##image: nginx:1.21
     build: ./requirements/nginx
-    image: obr_nginx
+    image: nginx
     ports:
       - 443:443
     volumes: 
@@ -17,23 +16,21 @@ services:
       - wordpress
     networks: 
       - mynetwork
-    #links: 
-    #  - wordpress
 
   # Second servise
   db:
     container_name: con_db
     build: ./requirements/mariadb
-    image: obr_db
+    image: db
     volumes:
     - db_data:/var/lib/mysql
     - ./requirements/mariadb/conf/my.cnf:/etc/mysql/my.cnf
     restart: always
     environment: 
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${USER}
+      MYSQL_PASSWORD: ${PASSWORD}
     networks:
     - mynetwork
     
@@ -41,24 +38,13 @@ services:
     container_name: con_wordpress
     #image: wordpress:php7.4-fpm-alpine
     build: ./requirements/wordpress
-    image: obr_wordpress
+    image: wordpress
     restart: always
     depends_on:
       - db
-    #ports:
-    #- "9000:9000"
     volumes: 
     - wordpress_data:/var/www/html
     - ./requirements/wordpress/conf/wp-config.php:/var/www/html/wp-config.php
-    #environment:
-    #  WORDPRESS_DB_HOST: db
-    #  MYSQL_ROOT_PASSWORD: 123
-    #  WORRPRESS_DB_NAME: wordpress
-    #  WORDPRESS_DB_USER: wordpress
-     # WORDPRESS_DB_PASSWORD: wordpress
-    #  WORDPRESS_TABLE_PREFIX: wp_
-    #links: 
-    #- db
     networks:
     - mynetwork
 

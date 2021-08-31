@@ -8,40 +8,40 @@ help:
 ##################################################
 # Создание docker-образов
 ##################################################
-obr_all : obr_nginx obr_db obr_wordpress
+all : nginx db wordpress
  
-obr_nginx: ## Создание сжатого docker-образа для контейнера nginx
-	docker build -t obr_nginx ./srcs/requirements/nginx
+nginx: ## Создание сжатого docker-образа для контейнера nginx
+	docker build -t nginx ./srcs/requirements/nginx
 
-obr_db: ## Создание сжатого docker-образа для контейнера db
-	docker build -t obr_db ./srcs/requirements/mariadb
+db: ## Создание сжатого docker-образа для контейнера db
+	docker build -t db ./srcs/requirements/mariadb
 
-obr_wordpress: ## Создание сжатого docker-образа для контейнера wordpress
-	docker build -t obr_wordpress ./srcs/requirements/wordpress
+wordpress: ## Создание сжатого docker-образа для контейнера wordpress
+	docker build -t wordpress ./srcs/requirements/wordpress
 
 drop_all: drop_nginx drop_db drop_wordpress
 
 drop_nginx:
-	cd srcs; docker rmi obr_nginx
+	cd srcs; docker rmi nginx
 
 drop_db:
-	cd srcs; docker rmi obr_db
+	cd srcs; docker rmi db
 
 drop_wordpress:
-	cd srcs; docker rmi obr_wordpress
+	cd srcs; docker rmi wordpress
 
 ##################################################
 # Запуск docker-образов
 ##################################################
 
 run_nginx:
-	docker run --name con_nginx --rm -it -p 80:80 -p 443:443 obr_nginx
+	docker run --name con_nginx --rm -it -p 80:80 -p 443:443 nginx
 
 run_wordpress:
-	docker run --name con_wordpress --rm -it obr_wordpress
+	docker run --name con_wordpress --rm -it wordpress
 
 run_db:
-	docker run --name con_db --rm -it -p 3306:3306 obr_db
+	docker run --name con_db --rm -it -p 3306:3306 db
 
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose
