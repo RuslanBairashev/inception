@@ -28,7 +28,7 @@ RUN apt-get update && \
 RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
     -keyout /etc/ssl/private/nginx-selfsigned.key \
     -out /etc/ssl/certs/nginx-selfsigned.crt \
-    -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=localhost'
+    -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=rmerrie.42.fr'
 
 # Прописываем права доступа к папкам
 #RUN mkdir /var/www/html
