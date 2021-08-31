@@ -34,11 +34,11 @@ services:
     - db_data:/var/lib/mysql
     - ./requirements/mariadb/conf/my.cnf:/etc/mysql/my.cnf
     restart: always
-    environment: 
-      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE}
-      MYSQL_USER: ${USER}
-      MYSQL_PASSWORD: ${PASSWORD}
+    environment:
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_NAME: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
     networks:
     - mynetwork
     
@@ -54,7 +54,12 @@ services:
       - db
     volumes: 
     - wordpress_data:/var/www/html
-    - ./requirements/wordpress/conf/wp-config.php:/var/www/html/wp-config.php
+    ##- ./requirements/wordpress/conf/wp-config.php:/var/www/html/wp-config.php
+    environment:
+      DB_NAME: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
     networks:
     - mynetwork
 
