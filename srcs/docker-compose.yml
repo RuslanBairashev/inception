@@ -6,6 +6,8 @@ services:
     ##image: nginx:1.21
     build: ./requirements/nginx
     image: nginx
+    env_file:
+      - .env
     ports:
       - 443:443
     volumes: 
@@ -16,12 +18,18 @@ services:
       - wordpress
     networks: 
       - mynetwork
+    environment: 
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      CERT: ${CERT}
+      CERT_KEY: ${CERT_KEY}
 
   # Second servise
   db:
     container_name: con_db
     build: ./requirements/mariadb
     image: db
+    env_file:
+      - .env
     volumes:
     - db_data:/var/lib/mysql
     - ./requirements/mariadb/conf/my.cnf:/etc/mysql/my.cnf
@@ -39,6 +47,8 @@ services:
     #image: wordpress:php7.4-fpm-alpine
     build: ./requirements/wordpress
     image: wordpress
+    env_file:
+      - .env
     restart: always
     depends_on:
       - db

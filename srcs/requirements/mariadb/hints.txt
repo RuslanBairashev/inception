@@ -1,5 +1,0 @@
-1. --execute=statement, -e statement / Execute the statement and quit.
-https://docs.oracle.com/cd/E88353_01/html/E37839/mysql-1.html
-
-2. mysql commands
-https://phoenixnap.com/kb/how-to-create-new-mysql-user-account-grant-privileges
