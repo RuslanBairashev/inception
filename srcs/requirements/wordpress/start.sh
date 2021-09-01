@@ -1,5 +1,9 @@
 #!/user/bin/env bash
 
+sed -i -e "s/\${DB_DATABASE}/${DB_DATABASE}/g" /var/www/html/wp-config.php
+sed -i -e "s/\${DB_USER}/${DB_USER}/g" /var/www/html/wp-config.php
+sed -i -e "s/\${DB_PASSWORD}/${DB_PASSWORD}/g" /var/www/html/wp-config.php
+sed -i -e "s/\${DB_HOST}/${DB_HOST}/g" /var/www/html/wp-config.php
 ##curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 php wp-cli.phar --info

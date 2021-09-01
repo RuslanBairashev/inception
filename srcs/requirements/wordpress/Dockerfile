@@ -1,6 +1,8 @@
 # OS установка (базовый образ)
 FROM debian:buster
 
+ARG DB_PASSWORD
+
 # установка пакетов
 RUN apt-get update && \
 	apt-get install -y \
@@ -25,6 +27,8 @@ COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 # Прописываем права доступа к папкам
 RUN chown -R www-data:www-data /var/www/html/* && \
 chmod -R 775 /var/www/html/*
+
+RUN sed -i "s/\${DB_PASSWORD}/${DB_PASSWORD}/g" /var/www/html/wp-config.php
 
 # Открываем порт
 EXPOSE 9000

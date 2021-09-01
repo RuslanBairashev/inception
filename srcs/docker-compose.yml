@@ -4,7 +4,11 @@ services:
   nginx:
     container_name: con_nginx
     ##image: nginx:1.21
-    build: ./requirements/nginx
+    build: 
+      context: ./requirements/nginx
+      args: 
+        - CERT=/etc/ssl/certs/nginx-selfsigned.crt
+        - CERT_KEY=/etc/ssl/private/nginx-selfsigned.key
     image: nginx
     env_file:
       - .env
@@ -18,10 +22,6 @@ services:
       - wordpress
     networks: 
       - mynetwork
-    environment: 
-      DOMAIN_NAME: ${DOMAIN_NAME}
-      CERT: ${CERT}
-      CERT_KEY: ${CERT_KEY}
 
   # Second servise
   db:
@@ -45,7 +45,10 @@ services:
   wordpress:
     container_name: con_wordpress
     #image: wordpress:php7.4-fpm-alpine
-    build: ./requirements/wordpress
+    build:
+      context: ./requirements/wordpress
+      args: 
+        - DB_PASSWORD=${DB_PASSWORD}
     image: wordpress
     env_file:
       - .env

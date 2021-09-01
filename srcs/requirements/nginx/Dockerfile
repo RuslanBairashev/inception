@@ -1,6 +1,9 @@
 # OS установка (базовый образ)
 FROM debian:buster
 
+ARG CERT \
+    CERT_KEY
+
 # установка пакетов
 RUN apt-get update && \
 	apt-get install -y \
@@ -26,9 +29,10 @@ RUN apt-get update && \
 # -out: сообщает OpenSSL, куда поместить созданный сертификат.
 # -SHA-2 (англ. Secure Hash Algorithm Version 2 — безопасный алгоритм хеширования, версия 2) — семейство криптографических алгоритмов — однонаправленных хеш-функций, включающее в себя алгоритмы SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/256 и SHA-512/224.
 RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/nginx-selfsigned.key \
-    -out /etc/ssl/certs/nginx-selfsigned.crt \
+    -keyout ${CERT_KEY} \
+    -out ${CERT} \
     -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=rmerrie.42.fr'
+	# -out /etc/ssl/certs/nginx-selfsigned.crt \
 
 # Прописываем права доступа к папкам
 #RUN mkdir /var/www/html
