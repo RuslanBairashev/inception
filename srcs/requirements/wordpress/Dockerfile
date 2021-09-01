@@ -28,7 +28,7 @@ COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 RUN chown -R www-data:www-data /var/www/html/* && \
 chmod -R 775 /var/www/html/*
 
-RUN sed -i "s/\${DB_PASSWORD}/${DB_PASSWORD}/g" /var/www/html/wp-config.php
+#RUN sed -i "s/\${DB_PASSWORD}/${DB_PASSWORD}/g" /var/www/html/wp-config.php
 
 # Открываем порт
 EXPOSE 9000

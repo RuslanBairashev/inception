@@ -9,14 +9,6 @@ RUN apt-get update && \
 	apt-get install -y \
     nginx \
 	openssl
-	# php7.2-fpm
-	# php7.2-mysql
-
-# NGINX configuration (удаляем index файл)
-# RUN rm var/www/html/index.nginx-debian.html
-
-# копируем свои настройки nginx
-##COPY ./conf /etc/nginx/sites-available
 
 # SSL
 # openssl: базовый инструмент командной строки для создания и управления сертификатами, ключами и другими файлами OpenSSL.
@@ -34,11 +26,7 @@ RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
     -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=rmerrie.42.fr'
 	# -out /etc/ssl/certs/nginx-selfsigned.crt \
 
-# Прописываем права доступа к папкам
-#RUN mkdir /var/www/html
-#RUN chown -R www-data:www-data /var/www/html/*
-
-# Открываем 2 порта
+# Указываем порт
 EXPOSE 443
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

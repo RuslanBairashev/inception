@@ -85,5 +85,8 @@ console-node: ## Подключение к консоли контейнера n
 ####################################################################################################
 # ___
 ####################################################################################################
-redo_volumes: ## Подключение к консоли контейнера nginx
-	sudo rm -rf /home/eternity/data; mkdir /home/eternity/data; mkdir /home/eternity/data/db_data; mkdir /home/eternity/data/wordpress_data;
+redo_volumes: ## 
+	sudo rm -rf /home/eternity/data; mkdir -p /home/eternity/data/db_data; mkdir /home/eternity/data/wordpress_data;
+
+start_eval: ## 
+	docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null

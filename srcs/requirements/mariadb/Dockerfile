@@ -2,21 +2,15 @@
 FROM debian:buster
 
 # установка пакетов
-RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y mariadb-server
+RUN apt-get update && \
+	apt-get install -y mariadb-server
 
 VOLUME /var/lib/mysql
 
-USER root
-
-
-
+# Копируем файлы в папку
 COPY ./conf/my.cnf /etc/mysql/my.cnf
 COPY ./tools/init.sql /docker-entrypoint-initdb.d/
-#COPY ./conf/wordpress /var/lib/mysql/wordpress
-
-# Копируем скрипты в папку
-COPY tools/start.sh ./
+COPY ./tools/start.sh ./
 
 EXPOSE 3306
 
