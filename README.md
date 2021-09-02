@@ -27,7 +27,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-d
 
 PHP config for wp:
 COPY ./conf/php-fpm.conf /etc/php/7.3/fpm/pool.d/www.conf
-
+123
 https://www.linux.org.ru/forum/admin/14522855
 https://stackoverflow.com/questions/37313780/how-can-i-start-php-fpm-in-a-docker-container-by-default/44409813
 Entrypoint fo wordpress:
