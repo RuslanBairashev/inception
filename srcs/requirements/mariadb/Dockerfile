@@ -5,11 +5,10 @@ FROM debian:buster
 RUN apt-get update && \
 	apt-get install -y mariadb-server
 
-VOLUME /var/lib/mysql
+#VOLUME /var/lib/mysql
 
 # Копируем файлы в папку
-COPY ./conf/my.cnf /etc/mysql/my.cnf
-COPY ./tools/init.sql /docker-entrypoint-initdb.d/
+#COPY ./conf/mysql.cnf /etc/mysql/conf.d/mysql.cnf
 COPY ./tools/start.sh ./
 
 EXPOSE 3306
