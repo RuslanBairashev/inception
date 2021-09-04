@@ -31,7 +31,6 @@ services:
       - .env
     volumes:
     - db_data:/var/lib/mysql
-    #- ./requirements/mariadb/conf/my.cnf:/etc/mysql/my.cnf
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}

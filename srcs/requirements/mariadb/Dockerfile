@@ -6,7 +6,6 @@ RUN apt-get update && \
 	apt-get install -y mariadb-server
 
 # Копируем файлы в папку
-#COPY ./conf/mysql.cnf /etc/mysql/conf.d/mysql.cnf
 COPY ./tools/start.sh ./
 
 EXPOSE 3306

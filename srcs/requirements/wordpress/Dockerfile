@@ -29,6 +29,6 @@ chmod -R 775 /var/www/html/*
 # Открываем порт
 EXPOSE 9000
 
-COPY ./start.sh /
+COPY ./tools/start.sh /
 
 ENTRYPOINT [ "bash", "./start.sh" ]
