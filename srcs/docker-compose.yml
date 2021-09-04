@@ -3,7 +3,6 @@ services:
   # First servise
   nginx:
     container_name: con_nginx
-    ##image: nginx:1.21
     build: 
       context: ./requirements/nginx
       args: 
@@ -44,7 +43,6 @@ services:
     
   wordpress:
     container_name: con_wordpress
-    #image: wordpress:php7.4-fpm-alpine
     build:
       context: ./requirements/wordpress
       args: 
@@ -57,7 +55,6 @@ services:
       - db
     volumes: 
     - wordpress_data:/var/www/html
-    ##- ./requirements/wordpress/conf/wp-config.php:/var/www/html/wp-config.php
     environment:
       MARIADB_DATABASE: ${DB_DATABASE}
       MARIADB_USER: ${DB_USER}

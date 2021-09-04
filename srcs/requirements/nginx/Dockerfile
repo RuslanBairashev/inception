@@ -24,7 +24,6 @@ RUN openssl req -x509 -sha256 -nodes -days 150 -newkey rsa:2048 \
     -keyout ${CERT_KEY} \
     -out ${CERT} \
     -subj '/C=RU/L=Kazan/O=21School/OU=R&D/CN=rmerrie.42.fr'
-	# -out /etc/ssl/certs/nginx-selfsigned.crt \
 
 # Указываем порт
 EXPOSE 443
