@@ -46,8 +46,6 @@ run_db:
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose
 ####################################################################################################
-build: ## Сборка docker-образов согласно инструкциям из docker-compose.yml
-	docker-compose build
  
 up: ## Создание и запуск docker-контейнеров, описанных в docker-compose.yml
 	cd srcs; docker-compose up -d
@@ -61,12 +59,6 @@ stop: ## Остановка docker-контейнеров, описанных в
 start: ## Запуск docker-контейнеров, описанных в docker-compose.yml
 	cd srcs; docker-compose start
  
-####################################################################################################
-# Подключение к консоли контейнеров (контейнеры должны быть запущены)
-####################################################################################################
-console-workspace: ## Подключение к консоли контейнера workspace (пользователь www-data)
-	docker-compose exec --user www-data workspace bash
- 
 exec_nginx: ## Подключение к консоли контейнера nginx
 	docker exec -it con_nginx bash
 
@@ -76,17 +68,8 @@ exec_wordpress: ## Подключение к консоли контейнера
 exec_db: ## Подключение к консоли контейнера db
 	docker exec -it con_db bash
 
-console-php-fpm: ## Подключение к консоли контейнера php-fmp (пользователь root)
-	docker-compose exec php-fpm bash
- 
-console-node: ## Подключение к консоли контейнера node (пользователь www-data)
-	docker-compose run --user www-data --rm node bash
-
-####################################################################################################
-# ___
-####################################################################################################
-redo_volumes: ## 
+redo_volumes: ## Пересоздать папки хранилищ
 	sudo rm -rf /home/eternity/data; mkdir -p /home/eternity/data/db_data; mkdir /home/eternity/data/wordpress_data;
 
-start_eval: ## 
+start_eval: ## Очистка перед проверкой
 	docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
