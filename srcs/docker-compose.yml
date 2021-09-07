@@ -69,14 +69,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/eternity/data/wordpress_data
+      device: /home/rmerrie/data/wordpress_data
   db_data:
     name: db_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/eternity/data/db_data
+      device: /home/rmerrie/data/db_data
 networks:
   mynetwork:
     name: mynetwork
