@@ -46,8 +46,6 @@ run_db:
 ####################################################################################################
 # Управление контейнерами с помощью docker-compose
 ####################################################################################################
-build: ## Сборка docker-образов согласно инструкциям из docker-compose.yml
-	docker-compose build
  
 up: ## Создание и запуск docker-контейнеров, описанных в docker-compose.yml
 	cd srcs; docker-compose up -d
@@ -60,12 +58,6 @@ stop: ## Остановка docker-контейнеров, описанных в
  
 start: ## Запуск docker-контейнеров, описанных в docker-compose.yml
 	cd srcs; docker-compose start
- 
-####################################################################################################
-# Подключение к консоли контейнеров (контейнеры должны быть запущены)
-####################################################################################################
-console-workspace: ## Подключение к консоли контейнера workspace (пользователь www-data)
-	docker-compose exec --user www-data workspace bash
  
 exec_nginx: ## Подключение к консоли контейнера nginx
 	docker exec -it con_nginx bash
@@ -88,5 +80,5 @@ console-node: ## Подключение к консоли контейнера n
 redo_volumes: ## 
 	sudo rm -rf /home/rmerrie/data; mkdir -p /home/rmerrie/data/db_data; mkdir /home/rmerrie/data/wordpress_data;
 
-start_eval: ## 
+start_eval: ## Очистка перед проверкой
 	docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
