@@ -14,7 +14,6 @@ services:
     ports:
       - 443:443
     volumes: 
-      - ./requirements/nginx/conf:/etc/nginx/conf.d
       - wordpress_data:/var/www/html
     restart: always
     depends_on:
